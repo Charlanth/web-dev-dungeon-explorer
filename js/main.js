@@ -78,9 +78,11 @@ function FillMapGrid() {
     }
 }
 
-function UpdateMapGrid() {
+function UpdateMapGridAndInfo() {
     let tileToUpdate = document.getElementById(`tile-${playerY}-${playerX}`);
     tileToUpdate.src = "/assets/tiles/empty.png";
+    document.getElementById("player-energy").textContent = `${playerEnergy} / 40`;
+    let scoreText = document.getElementById("player-score").textContent = `${playerScore}`;
 }
 
 playerMap[playerY][playerX] = playerValue;
@@ -111,11 +113,16 @@ function MovePlayer(x, y) {
         playerScore += 1000;
         map[playerY][playerX] = emptyValue;
     }
-    UpdateMapGrid();
+    UpdateMapGridAndInfo();
     LogPlayerMap();
 }
 
 document.addEventListener("keydown", function(event) {
+    if (playerEnergy <= 0)
+    {
+        console.log("Le joueur n'a plus d'énergie")
+        return;
+    }
     if (event.key === "w") {
         if(playerY < mapHeight - 1 && playerMap[playerY + 1][playerX] === availableTileValue) {
             MovePlayer(0, 1);
@@ -151,4 +158,4 @@ document.addEventListener("keydown", function(event) {
 });
 
 FillMapGrid()
-UpdateMapGrid()
+UpdateMapGridAndInfo()
