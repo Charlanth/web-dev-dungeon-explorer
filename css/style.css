@@ -1,0 +1,34 @@
+:root {
+    --background-color: #121421;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    background-color: var(--background-color);
+    color: #fff;
+}
+
+#map-table {
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.tile {
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+}
+
+.tile-img {
+    width: 3rem;
+    display: block;
+}
