@@ -12,24 +12,95 @@ html {
 
 body {
     margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     background-color: var(--background-color);
     color: #fff;
+}
+
+main {
+    flex: 1;
+}
+
+#map-section {
+    position: relative;
+}
+
+#player {
+    --player-y: 0px;
+    --player-x: 0px;
+    position: absolute;
+    width: 2.5rem;
+    height: 2.5rem;
+    bottom: calc(var(--player-y) * 2.5rem);
+    left: calc(var(--player-x) * 2.5rem);
+    border: solid 5px #0af;
 }
 
 #map-table {
     border: 0;
     border-spacing: 0;
     border-collapse: collapse;
-    margin: auto;
 }
 
 .tile {
-    width: 3rem;
-    height: 3rem;
+    width: 2.5rem;
+    height: 2.5rem;
     padding: 0;
 }
 
 .tile-img {
-    width: 3rem;
+    width: 2.5rem;
     display: block;
+}
+
+#player-stats {
+    display: flex;
+    justify-content: space-between;
+    width: 65%;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+#player-controller {
+    position: absolute;
+    left: 0;
+    top: 50%;
+}
+
+.button-container {
+    position: relative;
+}
+
+.button-up {
+    top: -3rem;
+    left: 3rem;
+}
+
+.button-down {
+    top: 0;
+    left: 3rem;
+}
+
+.button-left {
+    top: 0;
+    left: 0;
+}
+
+.button-right {
+    top: 0;
+    left: 6rem;
+}
+
+.player-button {
+    z-index: 10;
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
 }

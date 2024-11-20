@@ -14,21 +14,34 @@
     </header>
 
     <main>
-        <section id="player-stats">
-            <div>
-                <p>Énergie : <span id="player-energy"></span></p>
-            </div>
-            <div>
-                <p>Score : <span id="player-score"></span></p>
-            </div>
-        </section>
-        <section id="map-section">
-            <table id="map-table"></table>
-        </section>
+        <div class="wrapper">
+            <section id="player-controller">
+                <div class="button-container">
+                    <button id="button-up" type="button" class="player-button button-up">w</button>
+                    <button type="button" class="player-button button-down">s</button>
+                    <button type="button" class="player-button button-left">a</button>
+                    <button type="button" class="player-button button-right">d</button>
+                </div>
+            </section>
+            <section id="player-stats">
+                <div>
+                    <p>Énergie : <span id="player-energy"></span></p>
+                </div>
+                <div>
+                    <p>Score : <span id="player-score"></span></p>
+                </div>
+            </section>
+            <section id="map-section">
+                <div id="player"></div>
+                <table id="map-table"></table>
+            </section>
+        </div>
     </main>
 
     <footer>
-        <p>&copy; Charles-Émile Lanthier | Pixelart : Charles-Émile Lanthier</p>
+        <div class="wrapper">
+            <p>&copy; Charles-Émile Lanthier | Pixelart : Charles-Émile Lanthier</p>
+        </div>
     </footer>
 </body>
 </html>

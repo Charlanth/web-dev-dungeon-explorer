@@ -34,8 +34,6 @@ for (let y = 0; y < mapHeight; y++) {
     map.push([]);
     playerMap.push([]);
     for (let x = 0; x < mapWidth; x++) {
-
-        //Place le joueur environ au milieu puisque les dimensions de la carte sont impaires
         playerMap[y].push(availableTileValue);
 
         // Place les tuiles de la carte
@@ -79,6 +77,9 @@ function FillMapGrid() {
 }
 
 function UpdateMapGridAndInfo() {
+    let player = document.getElementById("player");
+    player.style.setProperty("--player-y", playerY);
+    player.style.setProperty("--player-x", playerX);
     let tileToUpdate = document.getElementById(`tile-${playerY}-${playerX}`);
     tileToUpdate.src = "/assets/tiles/empty.png";
     document.getElementById("player-energy").textContent = `${playerEnergy} / 40`;
@@ -156,6 +157,16 @@ document.addEventListener("keydown", function(event) {
         }
     }
 });
+
+//document.getElementById("button-up").addEventListener('click', MovePlayer(0, 1));
+
+function OnClickButtonUp() {
+    MovePlayer(0, 1);
+}
+
+function OnClickButtonDown() {
+    MovePlayer(0, -1);
+}
 
 FillMapGrid()
 UpdateMapGridAndInfo()
