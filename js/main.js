@@ -30,6 +30,12 @@ let bottomPressed = false;
 
 const mapGrid = document.getElementById("map-table");
 
+// Les bouttons pour controller le joueur
+const buttonUp = document.getElementById("button-up");
+const buttonDown = document.getElementById("button-down");
+const buttonLeft = document.getElementById("button-left");
+const buttonRight = document.getElementById("button-right");
+
 for (let y = 0; y < mapHeight; y++) {
     map.push([]);
     playerMap.push([]);
@@ -158,15 +164,10 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
-//document.getElementById("button-up").addEventListener('click', MovePlayer(0, 1));
-
-function OnClickButtonUp() {
-    MovePlayer(0, 1);
-}
-
-function OnClickButtonDown() {
-    MovePlayer(0, -1);
-}
-
 FillMapGrid()
 UpdateMapGridAndInfo()
+
+buttonUp.addEventListener("click", () => MovePlayer(0, 1));
+buttonDown.addEventListener("click", () => MovePlayer(0, -1));
+buttonLeft.addEventListener("click", () => MovePlayer(-1, 0));
+buttonRight.addEventListener("click", () => MovePlayer(1, 0));
