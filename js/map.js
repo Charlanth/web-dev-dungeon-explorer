@@ -5,9 +5,10 @@ const mapWidth = 25;
 
 const mapGrid = document.getElementById("map-table");
 
+// Carte du jeu
 let map = [];
 
- // cartes des emplacement disponible au joueur et aux ennemies
+// Carte des emplacement disponible au joueur et aux ennemies
 let playerMap = [];
 
 const TILE_VALUES = {
@@ -34,15 +35,9 @@ export function FillMapGrid() {
             let tileContainer = document.createElement("td");
 
             let tile = document.createElement("img");
-            if (map[row][col] === TILE_VALUES.TRAP) {
-                tile.src = "/assets/tiles/trap.png";
-            }
-            else if (map[row][col] === TILE_VALUES.TREASURE) {
-                tile.src = "/assets/tiles/treasure.png";
-            }
-            else if (map[row][col] === TILE_VALUES.WALL) {
-                tile.src = "/assets/tiles/wall.png";
-            }
+            tile.src = map[row][col] === TILE_VALUES.TRAP ? "/assets/tiles/trap.png" :
+                    map[row][col] === TILE_VALUES.TREASURE ? "/assets/tiles/treasure.png" :
+                    "/assets/tiles/wall.png";
             tile.id = `tile-${row}-${col}`
             tileContainer.appendChild(tile).className = "tile-img";
             mapRow.appendChild(tileContainer).className = "tile";
@@ -66,48 +61,51 @@ export function GenerateMap() {
         map.push([]);
         playerMap.push([]);
         for (let x = 0; x < mapWidth; x++) {
-            playerMap[y].push(TILE_VALUES.AVAILABLE);
-    
-            // Place les tuiles de la carte
-            if (Math.random() < 0.1) {
-                map[y].push(TILE_VALUES.WALL);
-    
-                // remplace les tuiles invalides de la carte joueur
-                playerMap[y][x] = TILE_VALUES.UNAVAILABLE;
-            }
-            else if (Math.random() > 0.9) {
-                map[y].push(TILE_VALUES.TREASURE);
-            }
-            else {
-                map[y].push(TILE_VALUES.TRAP);
-            }
+            const random = Math.random();
+
+            // Insère les tuiles dans la carte de déplacement du joueur
+            playerMap[y].push(random < 0.1 ? TILE_VALUES.UNAVAILABLE : TILE_VALUES.AVAILABLE);
+
+            // Insère les tuiles dans la carte du jeu
+            map[y].push(random < 0.1 ? TILE_VALUES.WALL : random > 0.9 ? TILE_VALUES.TREASURE : TILE_VALUES.TRAP);
         }
     }
 }
 
-export function MovePlayer(x, y) {
-    if (getPlayer().energy <= 0) {
-        console.log("Le joueur n'a plus d'énergie")
-        return;
-    }
-    if (getPlayer().y + y >= mapHeight || getPlayer().x + x >= mapWidth || getPlayer().y + y < 0 || getPlayer().x + x < 0 || playerMap[getPlayer().y + y][getPlayer().x + x] === TILE_VALUES.UNAVAILABLE) {
-        console.log("peut pas avancer la")
-        return;
-    }
+/**
+ * Gère le déplacement du joueur, le score du joueur et l'énergie du joueur lors
+ * d'un déplacement du joueur
+ * @param {number} deltaX Changement de la position x du joueur
+ * @param {number} deltaY Changement de la position y du joueur
+ * @returns Retourne rien
+ */
+export function MovePlayer(deltaX, deltaY) {
     let player = getPlayer();
+
+    // S'assure qu'il reste de l'énergie au joueur sinon préviens le joueur de bouger
+    if (player.energy <= 0) return;
+    
+    let newX = player.x + deltaX, newY = player.y + deltaY;
+
+    // S'assure que le joueur ne sort pas des limites et ne marche pas dans les murs
+    if (newY >= mapHeight || newX >= mapWidth || newY < 0 || newX < 0 ||
+        playerMap[newY][newX] === TILE_VALUES.UNAVAILABLE) 
+        return;
+
     playerMap[player.y][player.x] = TILE_VALUES.AVAILABLE;
-    player.x += x;
-    player.y += y;
-    playerMap[player.y][player.x] = TILE_VALUES.PLAYER;
-    if (map[player.y][player.x] === TILE_VALUES.TRAP) {
-        player.energy -= 1;
+    playerMap[newY][newX] = TILE_VALUES.PLAYER;
+    [player.x, player.y] = [newX, newY];
+
+    const tile = map[newY][newX];
+    if (tile === TILE_VALUES.TRAP) {
+        player.energy--;
         player.score -= 50;
-        RemoveTileFromMap(player.x, player.y);
     }
-    else if (map[player.y][player.x] === TILE_VALUES.TREASURE) {
+    else if (tile === TILE_VALUES.TREASURE) {
         player.score += 1000;
-        RemoveTileFromMap(player.x, player.y);
     }
+    tile !== TILE_VALUES.EMPTY && RemoveTileFromMap(player.x, player.y);
+
     UpdateMapGridAndInfo();
 }
 

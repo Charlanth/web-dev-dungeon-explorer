@@ -1,6 +1,4 @@
-import { GenerateMap, FillMapGrid, UpdateMapGridAndInfo, getPlayerMap, MovePlayer } from "./map.js";
-
-console.log("JavaScript is running!");
+import { GenerateMap, FillMapGrid, UpdateMapGridAndInfo, MovePlayer } from "./map.js";
 
 // Les bouttons pour controller le joueur
 const buttonUp = document.getElementById("button-up");
