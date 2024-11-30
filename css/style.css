@@ -1,5 +1,6 @@
 :root {
     --background-color: #121421;
+    --button-color: #21253d;
 }
 
 html {
@@ -23,42 +24,47 @@ main {
     flex: 1;
 }
 
-#map-section {
+#game-section, .button-container {
     position: relative;
 }
 
-#player {
-    --player-y: 0px;
+.player {
+    /* --player-y: 0px;
     --player-x: 0px;
-    position: absolute;
-    width: 2.5rem;
-    height: 2.5rem;
-    bottom: calc(var(--player-y) * 2.5rem);
-    left: calc(var(--player-x) * 2.5rem);
-    border: solid 5px #0af;
+    --tile-size: 2rem; */
+    /* position: absolute;
+    width: var(--tile-size);
+    height: var(--tile-size);
+    bottom: calc(var(--player-y) * var(--tile-size));
+    left: calc(var(--player-x) * var(--tile-size)); */
+    border: solid 1px #0af;
 }
 
 #map-table {
-    border: 0;
-    border-spacing: 0;
-    border-collapse: collapse;
+    flex-wrap: wrap;
 }
 
-.tile {
-    width: 2.5rem;
-    height: 2.5rem;
-    padding: 0;
+#map-table, .map-row {
+    display: flex;
+    gap: 0;
+    width: min(100vw, 50rem);
 }
 
 .tile-img {
-    width: 2.5rem;
+    width: 100%;
     display: block;
 }
 
-#player-stats {
-    display: flex;
-    justify-content: space-between;
-    width: 65%;
+.player-energy {
+    position: absolute;
+    top: -2.5rem;
+    left: 0;
+}
+
+.player-score {
+    position: absolute;
+    top: -2.5rem;
+    right: 0;
 }
 
 .wrapper {
@@ -68,14 +74,10 @@ main {
     position: relative;
 }
 
-#player-controller {
+.game-buttons {
     position: absolute;
-    left: 0;
-    top: 50%;
-}
-
-.button-container {
-    position: relative;
+    left: 2rem;
+    bottom: -3.5rem;
 }
 
 .button-up {
@@ -103,4 +105,35 @@ main {
     position: absolute;
     width: 3rem;
     height: 3rem;
+    border: none;
+    background-color: #fff;
+    border-radius: .5rem;
+}
+
+.button-finish-game {
+    position: absolute;
+    left: 41rem;
+    top: -2rem;
+    border: none;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: .5rem;
+}
+
+.game-over {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 60%;
+    top: 50vh - 50%;
+    left: 50vw - 50%;
+    border-radius: 1rem;
+    background-color: #ffffff50;
+    padding: 1rem;
+    backdrop-filter: blur(2px);
+}
+
+.hide {
+    display: none;
 }

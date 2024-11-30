@@ -10,30 +10,38 @@
 </head>
 <body>
     <header>
-
+        <div class="wrapper">
+            <h1>Dungeon Explorer</h1>
+        </div>
     </header>
 
     <main>
         <div class="wrapper">
-            <section id="player-controller">
-                <div class="button-container">
-                    <button id="button-up" type="button" class="player-button button-up">w</button>
-                    <button id="button-down" type="button" class="player-button button-down">s</button>
-                    <button id="button-left" type="button" class="player-button button-left">a</button>
-                    <button id="button-right" type="button" class="player-button button-right">d</button>
-                </div>
-            </section>
-            <section id="player-stats">
-                <div>
+            <section id="game-section">
+                <div class="player-energy">
                     <p>Énergie : <span id="player-energy"></span></p>
                 </div>
-                <div>
+                <div class="player-score">
                     <p>Score : <span id="player-score"></span></p>
                 </div>
-            </section>
-            <section id="map-section">
                 <div id="player"></div>
-                <table id="map-table"></table>
+                <div id="map-table"></div>
+                <div class="game-buttons">
+                    <div class="button-container">
+                        <div></div>
+                        <button id="button-up" type="button" class="player-button button-up">w</button>
+                        <div></div>
+                        <button id="button-down" type="button" class="player-button button-down">s</button>
+                        <button id="button-left" type="button" class="player-button button-left">a</button>
+                        <button id="button-right" type="button" class="player-button button-right">d</button>
+                    </div>
+                    <button id="button-finish-game" type="button" class="button-finish-game">Exit Dungeon</button>
+                </div>
+            </section>
+            <section id="game-over" class="game-over hide">
+                <h2>Game Over</h2>
+                <p id="highscore">Highscore : 0</p>
+                <button>New Game</button>
             </section>
         </div>
     </main>

@@ -1,8 +1,9 @@
 let player = {
-    x : 13,
-    y : 8,
+    x : 12,
+    y : 7,
     score : 0,
     energy : 40,
+    highScore : 0
 };
 
 /**
