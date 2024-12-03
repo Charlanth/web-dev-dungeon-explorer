@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeu</title>
+    <title>Dungeon Explorer</title>
 
+    <link rel="icon" type="image/x-icon" href="/assets/tiles/treasure.png">
     <link rel="stylesheet" href="/css/style.css">
     <script type="module" src="/js/main.js"></script>
 </head>
@@ -19,7 +20,7 @@
         <div class="wrapper">
             <section id="game-section">
                 <div class="player-energy">
-                    <p>Énergie : <span id="player-energy"></span></p>
+                    <p>Énergie : <span id="player-energy"></span> / 40</p>
                 </div>
                 <div class="player-score">
                     <p>Score : <span id="player-score"></span></p>
@@ -38,10 +39,11 @@
                     <button id="button-finish-game" type="button" class="button-finish-game">Exit Dungeon</button>
                 </div>
             </section>
-            <section id="game-over" class="game-over hide">
+            <section id="game-over" class="game-over">
                 <h2>Game Over</h2>
-                <p id="highscore">Highscore : 0</p>
-                <button>New Game</button>
+                <p>Score : <span id="final-score">0</span></p>
+                <p>Highscore : <span id="highscore">0</span></p>
+                <button id="new-game" type="button">New Game</button>
             </section>
         </div>
     </main>

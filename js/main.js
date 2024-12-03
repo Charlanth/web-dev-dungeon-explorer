@@ -1,4 +1,5 @@
-import { generateMap, updateStats, movePlayer, updateMapTile } from "./map.js";
+import { movePlayer } from "./map.js";
+import { toggleGameOver, startNewGame } from "./gameover.js";
 
 // Les bouttons pour controller le joueur
 const buttonUp = document.getElementById("button-up");
@@ -6,8 +7,8 @@ const buttonDown = document.getElementById("button-down");
 const buttonLeft = document.getElementById("button-left");
 const buttonRight = document.getElementById("button-right");
 
-const gameOverPopUp = document.getElementById("game-over");
 const buttonFinish = document.getElementById("button-finish-game");
+const buttonNewGame = document.getElementById("new-game");
 
 document.addEventListener("keydown", function(event) {
     if (event.key === "w") {
@@ -24,13 +25,12 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
-generateMap();
-updateMapTile(12, 7, "/assets/tiles/player.png", 4);
-updateStats();
+startNewGame()
 
 buttonUp.addEventListener("click", () => movePlayer(0, -1));
 buttonDown.addEventListener("click", () => movePlayer(0, 1));
 buttonLeft.addEventListener("click", () => movePlayer(-1, 0));
 buttonRight.addEventListener("click", () => movePlayer(1, 0));
 
-buttonFinish.addEventListener("click", () => gameOverPopUp.classList.toggle("hide"));
+buttonFinish.addEventListener("click", toggleGameOver);
+buttonNewGame.addEventListener("click", startNewGame);

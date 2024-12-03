@@ -1,4 +1,5 @@
 import { getPlayer } from "./player.js";
+import { gameOver, getGameOver, setGameOver } from "./gameover.js";
 
 const mapHeight = 15;
 const mapWidth = 25;
@@ -24,12 +25,14 @@ const tile_values = {
 };
 
 export let getTileMap = () => map;
+export let eraseMap = () => map = [];
+export let getMapGrid = () => mapGrid;
 
 /**
  * Met à jour le visuel des statistique du joueur
  */
 export function updateStats() {
-    document.getElementById("player-energy").textContent = `${getPlayer().energy} / 40`;
+    document.getElementById("player-energy").textContent = `${getPlayer().energy}`;
     document.getElementById("player-score").textContent = `${getPlayer().score}`;
 }
 
@@ -72,7 +75,11 @@ export function movePlayer(deltaX, deltaY) {
     let player = getPlayer();
 
     // S'assure qu'il reste de l'énergie au joueur sinon préviens le joueur de bouger
-    if (player.energy <= 0) return;
+    if (player.energy <= 0 || getGameOver()){
+        setGameOver(true);
+        gameOver();
+        return;
+    }
     
     let newX = player.x + deltaX, newY = player.y + deltaY;
 

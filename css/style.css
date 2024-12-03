@@ -29,14 +29,6 @@ main {
 }
 
 .player {
-    /* --player-y: 0px;
-    --player-x: 0px;
-    --tile-size: 2rem; */
-    /* position: absolute;
-    width: var(--tile-size);
-    height: var(--tile-size);
-    bottom: calc(var(--player-y) * var(--tile-size));
-    left: calc(var(--player-x) * var(--tile-size)); */
     border: solid 1px #0af;
 }
 

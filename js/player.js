@@ -11,3 +11,10 @@ let player = {
  * @returns Retourne l'objet du joueur
  */
 export let getPlayer = () => player;
+
+export function resetPlayer() {
+    player.x = 12;
+    player.y = 7;
+    player.score = 0;
+    player.energy = 40;
+}
