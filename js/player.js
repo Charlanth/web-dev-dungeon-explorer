@@ -1,3 +1,4 @@
+// L'objet contenant les données du joueur
 let player = {
     x : 12,
     y : 7,
@@ -12,6 +13,9 @@ let player = {
  */
 export let getPlayer = () => player;
 
+/**
+ * Remet les valeurs du joueur au valeurs par défaut sauf le highscore
+ */
 export function resetPlayer() {
     player.x = 12;
     player.y = 7;

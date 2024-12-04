@@ -1,15 +1,17 @@
 import { movePlayer } from "./map.js";
-import { toggleGameOver, startNewGame } from "./gameover.js";
+import { startNewGame, gameOver } from "./gameover.js";
 
-// Les bouttons pour controller le joueur
+// Les boutons pour controller le joueur
 const buttonUp = document.getElementById("button-up");
 const buttonDown = document.getElementById("button-down");
 const buttonLeft = document.getElementById("button-left");
 const buttonRight = document.getElementById("button-right");
 
+// Les boutons pour quitter le donjons et démarré une nouvelle partie
 const buttonFinish = document.getElementById("button-finish-game");
 const buttonNewGame = document.getElementById("new-game");
 
+// Gère la saisie du joueur avec le clavier
 document.addEventListener("keydown", function(event) {
     if (event.key === "w") {
         movePlayer(0, -1);
@@ -25,12 +27,15 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
+// Initialise une nouvelle partie
 startNewGame()
 
+// Initialise les eventListeners pour les boutons de mouvement du joueur
 buttonUp.addEventListener("click", () => movePlayer(0, -1));
 buttonDown.addEventListener("click", () => movePlayer(0, 1));
 buttonLeft.addEventListener("click", () => movePlayer(-1, 0));
 buttonRight.addEventListener("click", () => movePlayer(1, 0));
 
-buttonFinish.addEventListener("click", toggleGameOver);
+// Initialise les eventListeners pour les boutons de gameover et new game
+buttonFinish.addEventListener("click", gameOver);
 buttonNewGame.addEventListener("click", startNewGame);

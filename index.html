@@ -12,29 +12,31 @@
 <body>
     <header>
         <div class="wrapper">
-            <h1>Dungeon Explorer</h1>
+            <h1 class="title">Dungeon Explorer</h1>
         </div>
     </header>
 
     <main>
         <div class="wrapper">
             <section id="game-section">
-                <div class="player-energy">
+                <div class="stat player-energy">
                     <p>Énergie : <span id="player-energy"></span> / 40</p>
                 </div>
-                <div class="player-score">
+                <div class="stat player-score">
                     <p>Score : <span id="player-score"></span></p>
                 </div>
                 <div id="player"></div>
                 <div id="map-table"></div>
                 <div class="game-buttons">
                     <div class="button-container">
-                        <div></div>
-                        <button id="button-up" type="button" class="player-button button-up">w</button>
-                        <div></div>
-                        <button id="button-down" type="button" class="player-button button-down">s</button>
-                        <button id="button-left" type="button" class="player-button button-left">a</button>
-                        <button id="button-right" type="button" class="player-button button-right">d</button>
+                        <div class="button-row">
+                            <button id="button-up" type="button" class="player-button">w</button>
+                        </div>
+                        <div class="button-row">
+                            <button id="button-left" type="button" class="player-button">a</button>
+                            <button id="button-down" type="button" class="player-button">s</button>
+                            <button id="button-right" type="button" class="player-button">d</button>
+                        </div>
                     </div>
                     <button id="button-finish-game" type="button" class="button-finish-game">Exit Dungeon</button>
                 </div>
@@ -43,14 +45,14 @@
                 <h2>Game Over</h2>
                 <p>Score : <span id="final-score">0</span></p>
                 <p>Highscore : <span id="highscore">0</span></p>
-                <button id="new-game" type="button">New Game</button>
+                <button id="new-game" type="button" class="button-new-game">New Game</button>
             </section>
         </div>
     </main>
 
     <footer>
         <div class="wrapper">
-            <p>&copy; Charles-Émile Lanthier | Pixelart : Charles-Émile Lanthier</p>
+            <p class="copyright">&copy; Charles-Émile Lanthier | Pixelart : Charles-Émile Lanthier</p>
         </div>
     </footer>
 </body>
