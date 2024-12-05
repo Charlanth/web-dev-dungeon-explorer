@@ -1,4 +1,4 @@
-import { getPlayer } from "./player.js";
+import { getPlayer, updateStats } from "./player.js";
 import { gameOver, getGameOver, setGameOver } from "./gameover.js";
 
 // Dimension de la carte
@@ -37,14 +37,6 @@ export let eraseMap = () => map = [];
  * @returns L'objet html de la carte
  */
 export let getMapGrid = () => mapGrid;
-
-/**
- * Met à jour le visuel des statistique du joueur
- */
-export function updateStats() {
-    document.getElementById("player-energy").textContent = `${getPlayer().energy}`;
-    document.getElementById("player-score").textContent = `${getPlayer().score}`;
-}
 
 /**
  * Génère la carte du donjon pour le jeu et assigne les images pour la carte

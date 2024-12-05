@@ -28,6 +28,7 @@ main {
 
 .title {
     margin: .5rem 0 1.5rem 0;
+    z-index: 10; /* Affiche le titre en avant de la bare d'énergie */
 }
 
 #game-section, .wrapper {
@@ -51,6 +52,14 @@ main {
 .stat {
     position: absolute;
     top: -2.5rem;
+}
+
+.energy-bar {
+    top: -1.75rem;
+    background-color: #44ff00;
+    width: 50%;
+    height: 1.75rem;
+    border-radius: .5rem;
 }
 
 .player-energy {

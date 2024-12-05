@@ -1,5 +1,5 @@
-import { getPlayer, resetPlayer } from "./player.js";
-import { eraseMap, generateMap, getMapGrid, updateMapTile, updateStats } from "./map.js";
+import { getPlayer, resetPlayer, updateStats } from "./player.js";
+import { eraseMap, generateMap, getMapGrid, updateMapTile } from "./map.js";
 
 let isGameOver = true;
 
@@ -33,11 +33,14 @@ export function gameOver() {
     // Met à jour le highscore au besoin
     player.highScore = player.score > player.highScore ? player.score : player.highScore;
 
+    // Sauvegarde le highscore dans le navigateur
+    localStorage.setItem("highscore", player.highScore)
+
     // Change le texte du score final et du highscore
     finalScoreText.innerText = `${player.score}`;
     highScoreText.innerText = `${player.highScore}`;
 
-    setGameOver(true);
+    isGameOver = true;
 
     // Affiche le pop up de gameover
     gameOverPopUp.classList.toggle("hide");
@@ -55,6 +58,6 @@ export function startNewGame() {
     generateMap();
     updateMapTile(12, 7, "/assets/tiles/player.png", 4);
     updateStats();
-    setGameOver(false);
+    isGameOver = false;
     gameOverPopUp.classList.toggle("hide");
 }

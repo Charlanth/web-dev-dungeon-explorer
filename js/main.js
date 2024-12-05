@@ -13,16 +13,16 @@ const buttonNewGame = document.getElementById("new-game");
 
 // Gère la saisie du joueur avec le clavier
 document.addEventListener("keydown", function(event) {
-    if (event.key === "w") {
+    if (event.key === "w" || event.key === "ArrowUp") {
         movePlayer(0, -1);
     }
-    if (event.key === "s") {
+    if (event.key === "s" || event.key === "ArrowDown") {
         movePlayer(0, 1);
     }
-    if (event.key === "d") {
+    if (event.key === "d" || event.key === "ArrowRight") {
         movePlayer(1, 0);
     }
-    if (event.key === "a") {
+    if (event.key === "a" || event.key === "ArrowLeft") {
         movePlayer(-1, 0);
     }
 });
