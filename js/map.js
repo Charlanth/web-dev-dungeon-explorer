@@ -58,10 +58,10 @@ export function generateMap() {
             let tile = document.createElement("img");
 
             // Set the tile image according to the tile value
-            tile.src = map[y][x] === tile_values.trap ? "assets/tiles/trap.png" :
-                    map[y][x] === tile_values.treasure ? "assets/tiles/treasure.png" :
-                    map[y][x] === tile_values.wall ? "assets/tiles/wall.png" :
-                    "assets/tiles/empty.png";
+            tile.src = map[y][x] === tile_values.trap ? "./assets/tiles/trap.png" :
+                    map[y][x] === tile_values.treasure ? "./assets/tiles/treasure.png" :
+                    map[y][x] === tile_values.wall ? "./assets/tiles/wall.png" :
+                    "./assets/tiles/empty.png";
             tile.id = `tile-${y}-${x}`
 
             tileContainer.appendChild(tile).className = "tile-img";
@@ -114,7 +114,7 @@ export function movePlayer(deltaX, deltaY) {
     // Updates the player's position and the map
     updateMapTile(player.x, player.y);
     [player.x, player.y] = [newX, newY];
-    updateMapTile(getPlayer().x, getPlayer().y, "assets/tiles/player.png", tile_values.player);
+    updateMapTile(getPlayer().x, getPlayer().y, "./assets/tiles/player.png", tile_values.player);
     updateStats();
 
     // Checks if the player is out of energy
