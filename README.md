@@ -34,7 +34,7 @@ Download or clone the repository.
 
 Open index.html in a web browser with live server from VS Code.
 
-Or you can play the game, from this link: [insert link]
+Or you can play the game, from this link: (https://charlanth.github.io/web-dev-dungeon-explorer/)
 
 Start playing!
 
