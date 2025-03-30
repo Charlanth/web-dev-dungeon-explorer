@@ -56,7 +56,7 @@ export function startNewGame() {
     eraseMap();
     getMapGrid().innerHTML = "";
     generateMap();
-    updateMapTile(12, 7, "/assets/tiles/player.png", 4);
+    updateMapTile(12, 7, "./assets/tiles/player.png", 4);
     updateStats();
     isGameOver = false;
     gameOverPopUp.classList.toggle("hide");
