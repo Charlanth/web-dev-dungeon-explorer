@@ -3,13 +3,13 @@ import { eraseMap, generateMap, getMapGrid, updateMapTile } from "./map.js";
 
 let isGameOver = true;
 
-// Les objets utiliser pour le pop up de gameover
+// The elements for the game over pop up
 const gameOverPopUp = document.getElementById("game-over");
 const finalScoreText = document.getElementById("final-score");
 const highScoreText = document.getElementById("highscore");
 
 /**
- * Permet de changer la valeur de isGameOver
+ * Allows to change the value of isGameOver
  * @param {boolean} gameStatus 
  */
 export function setGameOver(gameStatus) {
@@ -17,38 +17,38 @@ export function setGameOver(gameStatus) {
 }
 
 /**
- * Fonction pour obtenir la valeur de isGameOver
- * @returns
+ * Returns the value of isGameOver
+ * @returns {boolean}
  */
 export let getGameOver = () => isGameOver;
 
 /**
- * Termine la partie et affiche le pop up de gameover
- * @returns rien
+ * Ends the game and shows the game over pop up
+ * @returns {void}
  */
 export function gameOver() {
     if(!gameOverPopUp.classList.contains("hide")) return;
     let player = getPlayer();
 
-    // Met à jour le highscore au besoin
+    // Updates player highscore if the score is higher than the previous one
     player.highScore = player.score > player.highScore ? player.score : player.highScore;
 
-    // Sauvegarde le highscore dans le navigateur
+    // Saves the highscore in local storage
     localStorage.setItem("highscore", player.highScore)
 
-    // Change le texte du score final et du highscore
+    // Updates the score and highscore text in the pop up
     finalScoreText.innerText = `${player.score}`;
     highScoreText.innerText = `${player.highScore}`;
 
     isGameOver = true;
 
-    // Affiche le pop up de gameover
+    // Shows the game over pop up
     gameOverPopUp.classList.toggle("hide");
 }
 
 /**
- * Démarre une nouvelle partie et cache le pop up de gameover
- * @returns 
+ * Resets the game and starts a new one
+ * @returns {void}
  */
 export function startNewGame() {
     if(!getGameOver()) return;

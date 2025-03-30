@@ -1,17 +1,18 @@
 import { getPlayer, updateStats } from "./player.js";
 import { gameOver, getGameOver, setGameOver } from "./gameover.js";
 
-// Dimension de la carte
+// Map dimensions
 const mapHeight = 15;
 const mapWidth = 25;
 
-// Objet html de la carte
+// HTML element for the map grid
 const mapGrid = document.getElementById("map-table");
 
-// Carte du jeu
+// Game map
+// The map is a 2D array that contains the values of the tiles
 let map = [];
 
-// Valeurs pour la carte du jeu
+// Tile values
 const tile_values = {
     trap : 0,
     treasure : 1,
@@ -21,25 +22,27 @@ const tile_values = {
 };
 
 /**
- * Fonction pour obtenir les données de la carte du jeu
- * @returns La carte du jeu
+ * Returns the game map
+ * @returns {Array} The game map
  */
 export let getTileMap = () => map;
 
 /**
- * Efface les données de la carte du jeu
- * @returns
+ * Erases the map of the game
+ * @returns {void}
  */
 export let eraseMap = () => map = [];
 
 /**
- * Fonction pour obtenir l'objet html de la carte du jeu
- * @returns L'objet html de la carte
+ * Returns the map grid HTML element
+ * @returns {HTMLElement} The map grid HTML element
  */
 export let getMapGrid = () => mapGrid;
 
 /**
- * Génère la carte du donjon pour le jeu et assigne les images pour la carte
+ * Generates the map of the game
+ * The map is generated randomly with walls, traps and treasures
+ * @returns {void}
  */
 export function generateMap() {
     for (let y = 0; y < mapHeight; y++) {
@@ -48,13 +51,13 @@ export function generateMap() {
         for (let x = 0; x < mapWidth; x++) {
             const random = Math.random();
 
-            // Insère les tuiles dans la carte du jeu
+            // Insert a random tile in the map
             map[y].push(random < 0.1 ? tile_values.wall : random > 0.9 ? tile_values.treasure : tile_values.trap);
 
             let tileContainer = document.createElement("div");
             let tile = document.createElement("img");
 
-            // Trouve l'image a afficher pour la tuile
+            // Set the tile image according to the tile value
             tile.src = map[y][x] === tile_values.trap ? "/assets/tiles/trap.png" :
                     map[y][x] === tile_values.treasure ? "/assets/tiles/treasure.png" :
                     map[y][x] === tile_values.wall ? "/assets/tiles/wall.png" :
@@ -69,34 +72,34 @@ export function generateMap() {
 }
 
 /**
- * Gère le déplacement du joueur, le score du joueur et l'énergie du joueur lors
- * d'un déplacement du joueur
- * @param {number} deltaX Changement de la position x du joueur
- * @param {number} deltaY Changement de la position y du joueur
- * @returns Retourne rien
+ * Moves the player in the map, checks if the player can move 
+ * and applies the effects of the tile the player is on
+ * @param {number} deltaX Change in the player's x position
+ * @param {number} deltaY Change in the player's y position
+ * @returns {void}
  */
 export function movePlayer(deltaX, deltaY) {
     let player = getPlayer();
 
-    // S'assure qu'il reste de l'énergie au joueur sinon préviens le joueur de bouger
+    // Makes sure the player has enough energy to move
     if (player.energy <= 0 || getGameOver()){
         setGameOver(true);
         gameOver();
         return;
     }
     
-    // Nouvelle position du joueur
+    // Calculates the new position of the player
     let newX = player.x + deltaX, newY = player.y + deltaY;
 
-    // S'assure que le joueur ne sort pas des limites et ne marche pas dans les murs
+    // Checks if the new position is out of bounds or if the tile is a wall
     if (newY >= mapHeight || newX >= mapWidth || newY < 0 || newX < 0 ||
         map[newY][newX] === tile_values.wall) 
         return;
 
-    // Trouve la tuile que le joueur a marcher dessus
+    // Finds the tile at the new position
     const tile = map[newY][newX];
 
-    // Applique les effets des tuiles au joueur
+    // Applies the effects of the tile
     if (tile === tile_values.trap) {
         player.energy--;
         player.score -= 50;
@@ -108,13 +111,13 @@ export function movePlayer(deltaX, deltaY) {
         player.score -= 10;
     }
     
-    // Met à jour les informations du jeu, les tuiles, les coordonnées du joueur et les statistiques
+    // Updates the player's position and the map
     updateMapTile(player.x, player.y);
     [player.x, player.y] = [newX, newY];
     updateMapTile(getPlayer().x, getPlayer().y, "/assets/tiles/player.png", tile_values.player);
     updateStats();
 
-    // Affiche le pop up de gameover si l'énergie du joueur atteind 0 ou moins
+    // Checks if the player is out of energy
     if (player.energy <= 0) {
         setGameOver(true);
         gameOver();
@@ -122,11 +125,12 @@ export function movePlayer(deltaX, deltaY) {
 }
 
 /**
- * Met à jour les donnés d'une tuie et l'image de la tuile
- * @param {number} tileValue la valeur à le et sa valeur selon les paramètres
- * @param {number} x le x de la tuile à mettre à jour
- * @param {number} y le y de la tuile à mettre à jour
- * @param {string} tilePath le chemin ddonner à la tuile
+ * Updates the tile at the given position in the map
+ * @param {number} tileValue value of the tile to update
+ * @param {number} x x coordinate of the tile to update
+ * @param {number} y y coordinate of the tile to update
+ * @param {string} tilePath path to the tile image
+ * @returns {void}
  */
 export function updateMapTile(x, y, tilePath = "/assets/tiles/empty.png", tileValue = tile_values.empty) {
     const tileToUpdate = document.getElementById(`tile-${y}-${x}`);
