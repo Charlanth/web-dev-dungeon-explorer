@@ -114,7 +114,7 @@ export function movePlayer(deltaX, deltaY) {
     // Updates the player's position and the map
     updateMapTile(player.x, player.y);
     [player.x, player.y] = [newX, newY];
-    updateMapTile(getPlayer().x, getPlayer().y, "./assets/tiles/player.png", tile_values.player);
+    updateMapTile(getPlayer().x, getPlayer().y, "assets/tiles/player.png", tile_values.player);
     updateStats();
 
     // Checks if the player is out of energy
