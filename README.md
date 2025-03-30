@@ -38,9 +38,7 @@ Or you can play the game, from this link: [insert link]
 
 Start playing!
 
-Better UI: Improved visuals and animations.
-
-Credits
-Developed as a college project by [Your Name].
+## Credits
+Developed as a college project by Charlanth.
 
 Enjoy the game! 🎮
